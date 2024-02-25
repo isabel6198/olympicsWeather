@@ -189,21 +189,22 @@ visualiser_temperatures <- function(weather_forecast) {
     stop("Le package plotly est nécessaire pour cette fonction.")
   }
 
-  gg <- ggplot2::ggplot(weather_forecast, ggplot2::aes(x = date_heure)) +
-    ggplot2::geom_line(ggplot2::aes(y = temperature_celsius, color = "Température"), size = 0.6) +
-    ggplot2::geom_line(ggplot2::aes(y = temperature_ressentie, color = "Température ressentie"), size = 0.6) +
-    ggplot2::scale_color_manual(values = c("Température" = "blue", "Température ressentie" = "red")) +
-    ggplot2::theme_minimal() +
-    ggplot2::labs(
+  gg <- ggplot(weather_forecast, aes(x = date_heure)) +
+    geom_line(aes(y = temperature_celsius, color = "Température"), linewidth = 0.6) +  # Modifié ici
+    geom_line(aes(y = temperature_ressentie, color = "Température ressentie"), linewidth = 0.6) +  # Modifié ici
+    scale_color_manual(values = c("Température" = "blue", "Température ressentie" = "red")) +
+    theme_minimal() +
+    labs(
       title = "Température et Température ressentie au fil du temps",
       x = "Heure",
       y = "Température (°C)",
       color = "Légende"
     )
 
-  print(plotly::ggplotly(gg))
+  print(ggplotly(gg))
 }
 
 
 get_forecast(c(47.21, 1.55))
+
 
